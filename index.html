@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <a href="" title=""></a>
+
+
+    <p id="demo">Demo</p>
+    <div>Div1</div>
+    <div>Div2</div>
+
+    <script>
+
+       var demo =  document.getElementById("demo");
+       demo.style.backgroundColor = "green";
+
+       var divs =  document.getElementsByTagName("div");
+
+       console.log('demo', demo);
+       console.log('divs', divs);
+
+      var elements =  document.querySelectorAll("#demo,div");
+      console.log('elements', elements);
+
+
+    </script>
+</body>
+</html>

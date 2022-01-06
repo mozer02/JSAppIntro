@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <script>
+
+        const d = new Date(); // JS de bugunün yani şuanın tarihini getirir.
+        const d2 = new Date('10-10-2021');
+        const d3 = new Date(2021,10,23,10,30); // year,month,day,hour,minute
+
+        // Date de object tipindedir.
+
+        console.log('d', d);
+        console.log('d2',d2);
+        console.log('d3',d3);
+        console.log('d2-type', typeof(d2));
+
+        const today = new Date();
+        const hour = today.getHours(); // saati getirir.
+        const minute = today.getMinutes(); // dakikayı getirir.
+        const day = today.getDate(); // ayın gününü getirir 1-31 arası değer döner
+        const weekDay = today.getDay(); // haftanın günü getir 0-6 arası indeks değeri döner
+        const mounth = today.getMonth(); // tarihin ay değerini getirir. 0-11 arası değer döner
+        const year = today.getFullYear(); // yıl değerini döner.
+        // Not JS de ay değeri index mantığı ile tutulduğunda şuankiay-1 döner. dikkat edelim.
+        // haftanın günlerinde de aynı durum söz konusu 0 pazar kabul edilir. 6 ise cumartesi 
+
+        console.log('today', today);
+        console.log('hour', hour);
+        console.log('minute',minute);
+        console.log('day', day);
+        console.log('weekDay', weekDay);
+        console.log('mounth', mounth);
+        console.log('year', year);
+
+        today.setFullYear(2023);
+        console.log('yeni tarih', today);
+        // yukarıdaki methodların setleri de var.
+
+
+
+
+        
+        // JS Date tipinin protipine addHours methodu ekledim.
+        // DeğişkenTipi.prototype ile nesnenin JS deki default haline bağlanarak genişletebiliyoruz. biz buna extension function ismini veriyoruz.
+        Date.prototype.addHours = function(h){
+            this.setHours(this.getHours()+h);
+            return this;
+        }
+
+        Date.prototype.addYears = function(year){
+            this.setFullYear(this.getFullYear()+ year);
+            return this;
+        }
+
+        // nesneye yeni bir property ile genişletme
+        // Date.prototype.turkishHour = 0;
+
+
+        console.log('after-addHoursMethod',today.addHours(3));
+        console.log('after-addHoursMethod-2',today.addYears(-3));
+
+        // JS de datetime işlemleri yaparken addYear gibi bir method yok.
+
+
+        Date.prototype.getFormattedDate = function(format = 'dd/MM/yyyy'){
+
+            if(format == 'dd/MM/yyyy') {
+                return `${this.getDate()}/${this.getMonth() + 1}/${this.getFullYear()}`
+            } else if( format == 'MM/dd/yyyy') { // en-US
+                return `${this.getMonth() + 1}/${this.getDate()}/${this.getFullYear()}`
+            }
+           
+            //$"{3}" => c# daki karşılığı
+
+            // `${1}` // backtick yazım şekli interpolation,
+            return this;
+        }
+
+
+        console.log('formatDate-today-tr', today.getFormattedDate('dd/MM/yyyy'));
+        console.log('formatDate-today-enUs', today.getFormattedDate('MM/dd/yyyy'));
+
+    </script>
+    
+</body>
+</html>

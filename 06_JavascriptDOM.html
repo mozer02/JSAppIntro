@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- button tıklandığında p elementi içeriği göster gizle yapıcaz. -->
+
+    <!-- Ornek 1 butona tıklanınca göster gizle yapma javascript ile stil işlemleri -->
+    <button onclick="Toggle()">Göster Gizle</button>
+    <p id="paraf" style="display: none">paragraf</p>
+
+    <hr>
+
+    <!-- Ornek 2 Select ile seçilen değeri bulma -->
+
+    <!-- input ve selectlerde veriyi yakalamak için event kullanırız. -->
+    <select onchange="SelectCity(event)">
+        <option value="35">izmir</option>
+        <option value="34">istanbul</option>
+        <option value="06">ankara</option>
+    </select>
+
+    seçilen şehir plakası : <span id="selectedCity"></span>
+
+
+    <hr>
+
+    <!-- Örnek 3 Radio button ve Checkbox değerlerini okuma -->
+
+    <input type="radio" data-value="Bay" checked onchange="selectGender(event,'Bay')" name="gender" > Bay
+    <input type="radio" data-value="Bayan" onchange="selectGender(event,'Bayan')" name="gender"> Bayan
+
+
+   Cinsiyet : <input type="text" id="gender" value="Bay"></span>
+
+   <hr>
+
+    <!-- Örnek 5 formdan gönderilen değerleri okuma -->
+
+
+    <!-- formdan değerleri okurken name alanı üzerinden ilgili form elemanlarının değerine erişiriz. -->
+    <form name="userForm" method="POST" onsubmit="submitForm(event)">
+        <input type="text" name="email">
+        <span class="errorMessages"></span>
+        <br>
+        <input type="text" name="username">
+        <span class="errorMessages"></span>
+        <br>
+        <input type="checkbox" name="rememberMe"> Beni hatırla!
+        <br>
+        <input type="submit" value="Login">
+    </form>
+
+    <!-- formdaki bilgileri onSubmit eventi ile yakalıyoruz. -->
+
+
+    <script>
+
+    const submitForm = (event) => {
+        // formun farklı bir sayfaya yönlenmesini aşağıdaki kod ile engelkledik.
+        event.preventDefault();
+
+        
+
+        const formValues = {
+        
+            email: userForm.email.value, // formName[inputName].value ile formun içindeki inputların value'sunu okuyoruz
+            username: userForm.username.value,
+            rememberMe: userForm.rememberMe.checked 
+            // eğer form içerisinde radio button veya checkbox varsa bu durumda checked ile tru yada false olduğunu okuruz.
+        };
+
+        console.log('formValues', formValues);
+
+        // JS ile form validasyon kontrolü
+        const errorArray = [];
+
+        if(!formValues.email.includes('@')){
+            // eğer formda hata varsa errorArray hata mesajlarını pushladık
+            errorArray.push('E-posta fornmatında giriniz');
+        }
+        else {
+            // hata yoksa boş mesaj attık
+            errorArray.push('');
+        }
+
+        if(formValues.username.length < 8){
+            errorArray.push('kullanıcı adı en az 8 karakter uzunluğunda olmalıdır');
+        } else {
+            errorArray.push('');
+        }
+
+
+        const erorSpans = document.getElementsByClassName('errorMessages');
+        // className göre errorMessages birden fazla element yakaladık
+        // birden fazla elemente aynı anda stil uygulanacak yada değerleri değiştirilecek ise bu durumda getElementsByClassName kullanabiliriz.
+
+        // errorArray hata mesajı kadar dön
+        for (let index = 0; index < errorArray.length; index++) {
+            // errorSpans elementinin yani hata spaninin text hata mesajı ile güncelle
+            erorSpans[index].textContent = errorArray[index];
+            // hata spaninin rengini kırmızı yap dedik.
+            erorSpans[index].style.color = 'red';
+        }
+
+    }
+
+    const selectGender = (event, gender) => {
+        console.log('event', event);
+        // eğer radio button veya checkbox ile çalışırsak event.target.value yerine checked seçim yapılıp yapılmadığını yakalarız. 
+        const value = event.target.checked;
+        const element = document.getElementById('gender');
+        element.value = gender;
+
+    }
+
+    const SelectCity = (event) => {
+        console.log('event',event);
+        // query selectorde c# seçici gibi çalışır.id,elementadı,class göre tek bir html elementini seçmemizi sağlar.
+        const element = document.querySelector('#selectedCity');
+        // <></> elementlerin içlerinde string değeri textContent ile okuruz.
+        // eğer değer okuyacağımız element bir input ise bu durumda textContent yerine value değerinde elemente ait değeri okuyabilir veya değiştirebiliriz.
+        element.textContent = event.target.value;
+    }
+
+      // butona tıklanınca çalışacak olan action
+      const Toggle = () => {
+        const parafElement = document.getElementById("paraf");
+        // style attribute değerini okumak için bir işlem yaptık.
+        const displayValue = parafElement
+          .getAttribute("style");
+        //   .replace("display:", "");
+        // console.log("displayValue", displayValue);
+
+        if (displayValue == "display:none") {
+        //  parafElement.removeAttributeNS('style');
+          parafElement.setAttribute("style", "display:block");
+        } else {
+          parafElement.setAttribute("style", "display:none");
+        }
+
+        // displayValue göre gizli ise göster => görünüyor ise gizle algoritması yazacağız.
+
+      };
+    </script>
+  </body>
+</html>

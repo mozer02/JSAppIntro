@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        let a = ' Merhaba Dünya; Merhaba Gezegen ';
+        let trimedA = a.trim(); // 'Merhaba Dünya; Merhaba Gezegen' başta ve sonraki boşlukları alır. aradaki boşluklara dokunmaz
+        let splitString = a.split(';'); // ['Merhaba Dünya','Merhaba Gezegen']
+        let uppercasedValue = a.toUpperCase(); // MERHABA ... 
+        let lowercasedValue = a.toLowerCase(); // merhaba ...
+        let replacedValue = a.replace(';','#'); //  Merhaba Dünya# Merhaba Gezegen 
+        let subStringValue = a.substring(2,3); //  Merhaba Dünya# Merhaba Gezegen // 2.indexten itibaren 3 tane al demek  // rha çıktısı verir.
+        let concatString = "Ali".concat(" Tan "); // Ali Tan string birleştirme yaptık
+        let startsWith = "cenk".startsWith("c"); // true yada false döner. ile başlıyor mu 
+        let endsWith = "deniz".endsWith("z"); // true yada false döner. z ile bitiyor mu
+        let contains = "Merhaba JS".includes("a"); // içerisinde a geçiyor mu
+        // js de contains yerine includes kullanırız.
+        let bold = "ali".bold(); // <b>ali</b> koyu bir font olur.
+        let deneme1 = "deneme1".fontsize(32); // 32 puntoluk bir yazı haline getirir.
+        // Regex düzenli ifadeler => genelde metnin içerisinde karakter arama yada bir arama işlemi için kullanırız.
+
+        // a ile z arasında bir değer geçerse geçen değeri gösterir. geçmez ise boş döner.
+        const paragraph = 'ThE quick brown fox jumps over the lazy dog. It barked.';
+        // g ile işaretlendiği için tüm bir metinsel ifade de geçenlerin hepsine bakar. g flag kullanılmaz ise ilk bulduğu ifade sonrasında bulmaya devam etmez.
+        // i flag ise bir arama işleminde büyük küçük harf duyarsız yapıp metni doğru bir şekilde aramamızı sağlar.
+        const regex = /[A-Z]/g;
+        const found = paragraph.match(regex);
+        console.log(found);
+        // tüm büyük karakterleri buldu 
+        // expected output: Array ["T", "I","E"]
+
+        /\d/.test('32424332') // bunun sonucu  true yada false döner. => true metinsel bir ifadenin /\d/ uygun olup olmadığını kontrol eder. uyarsa true uymazsa false döner.
+
+
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        const numbers = [10, 9, 3, 17, 23, 89];
+
+        // eğer basit bizi dizi içerisindeki değerleri sıralayacak isek aşağıdaki şekilde sort methodunu kullanabiliriz.
+        // buble sort algoritması ile
+        const sortedAscNumbers = numbers.sort(function (a, b) { return a - b });
+        console.log('sortedNumbers', sortedAscNumbers);
+        // asc
+        //const reversedNumbers = numbers.sort().reverse(); // desc 
+        const reversedNumbers = sortedAscNumbers.reverse();
+        console.log('reversedNumbers', reversedNumbers);
+
+
+        const names = ['ali', 'ayse', 'can', 'taner', 'betül'];
+
+        // string dizilerde yukarıdaki gibi number dizilerdeki gibi işlem yapmamıza gerek kalmadan asc olarak sıralar.
+        const sortedNames = names.sort();
+        console.log('sortedNames', sortedNames);
+
+        // obje dizisine göre sıralama
+        const employees = [{ name: 'mustafa', surname: 'can', age: 23 }, { name: 'ayse', surname: 'köknar', age: 25 }];
+
+        // console.log('sortedEmps', employees.sort());
+
+
+        // 1 işlem; eğer string alana göre sıralama yapacaksak > < ifadeleri 1,0,-1 gibi değerler döndürmeliyiz.
+        // 2 işlem; eğer rakamsal bir değere göre sıralama yapacak isek yukarıdaki gibi bir a-b algoritmasına göre sıralama yapılabilir.
+
+        const sortedByNames = employees.sort(function (a, b) {
+
+            return a.name.localeCompare(b.name);
+        });
+
+        // "ali".localeCompare("Can"); ali candan önde ise 1 arkada ise -1 değerleri eşitse 0 değerini localeCompare ile üretiririz. bu sayade dönen bu sonuçlara göre dizi kendini sıralar.
+
+        const sortedBySurNames = employees.sort(function (a, b) {
+            return a.surname.localeCompare(b.surname);
+        });
+
+
+        // asc
+        const sortedByAges = employees.sort(function (a, b) {
+            return a.age - b.age;
+        });
+
+        // desc
+        const sortedByAgesDesc = employees.sort(function (a, b) {
+            return b.age - a.age;
+        });
+
+        console.log('sortedByNames', sortedByNames);
+        console.log('sortedBySurNames', sortedBySurNames);
+        console.log('sortedByAges', sortedByAges);
+        console.log('sortedByAgesDesc', sortedByAgesDesc);
+
+
+        const employees2 = [{ name: 'mustafa', surname: 'can', age: 23 }, { name: 'ayse', surname: 'köknar', age: 25 }];
+
+        Array.prototype.OrderBy = function (propName, orderType) {
+            // hangi propertysine göre sıralama yapacağım, orderType = asc veya desc değeri
+
+            if(orderType != 'asc' && orderType != 'desc')
+                throw new Error('sırlama tipi için asc veya desc kullanınız');
+
+            // this bu nesnein kendi instance'dır.
+            const propertyValue = this[0][propName]
+            // bu gönderilen değer number mı string mi ?
+
+            if (propertyValue != undefined) {
+
+                if (typeof (propertyValue) == 'string') {
+                    // localeCompare
+
+                    this.sort(function (a, b) {
+
+                        if (orderType == 'asc')
+                            return a[propName].localeCompare(b[propName]);
+                        else
+                            return b[propName].localeCompare(a[propName]);
+                    })
+
+
+                } else if (typeof (propertyValue) == 'number') {
+
+
+                    if (orderType == 'asc') {
+                        this.sort(function (a, b) {
+                            return a[propName] - b[propName]
+                        })
+                    } else if (orderType == 'desc') {
+                        this.sort(function (a, b) {
+                            return b[propName] - a[propName]
+                        })
+                    }
+                }
+
+            } else {
+                // console hata düşmesini throw new Error ile yaptık
+                throw new Error(`${propName} asında bir property bulunamadı!`)
+            }
+        }
+
+        employees2.OrderBy('name', 'asc');
+        console.log('employees2', employees2);
+
+
+        // Array concat yani bir diziye başka dizilerin eklenmesi olayı
+
+        const array1 = [34,56,67];
+        const array2 = [1,32,67,89];
+        let array3 = [];
+        array3 =  array3.concat(array1,array2);
+
+        console.log('array3', array3);
+
+        
+
+
+    </script>
+
+</body>
+
+</html>

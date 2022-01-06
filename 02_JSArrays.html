@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        const person = {name:'ali', surname:'tan'};
+
+        // forin kullanarak bir objenin içerisinde propertylerde gezinti yapabiliriz. c# daki karşılığı reflection diye bir konuya girer.
+
+        for (const prop in person) {
+            // Object.hasOwnProperty.call ile bu person objesi içerisinde person' içerisindeki her bir property kontrol ederir.
+            if (Object.hasOwnProperty.call(person, prop)) {
+                // person.name
+                // person.surname
+                const propValue = person[prop];
+                
+            }
+        }
+
+
+        // Note: Eğer obje dizisi ile çalışıyorsa foreach yada for of kullanırız.
+        let persons = [
+            {name:'mert',surname:'corukoglu'},
+            {name:'furkan', surname:'biçer'},
+            {name:'eren', surname:'baba'},
+            {name:'aleyna', surname:'yesil'},
+            {name:'mustafa', surname:'akdağ'}
+        ];
+
+
+        // for of kullanımı
+        for (const person of persons) {
+            console.log('person', person);
+        }
+
+        //forEach kullanımı
+        persons.forEach(person => {
+            console.log('person2', person);
+        });
+
+        // number dizisi, string isim listesi vs yada başlangıç bitişi belli olan bir işlem için for tercih edeririz
+
+        let counter = 0;
+
+        for (let index = 0; index < 10; index++) {
+            counter++;
+        }
+
+
+        // dizi işlemleri
+
+        // diziye bir eleman ekleme
+        // spread operatörü ile diziye eleman ekleme
+        // ... spread operator anlamına gelir
+        // spread operatörü sonrasında , den sonra bir obje eklediğimizden dolayı, son eleman olarak diziye ekleme yaptık.
+        persons = [... persons, {name:'özge',surname:'ergezer'}];
+        // diziye ilk eleman olarak ekleme yapmak için
+        persons = [{name:'furkan',surname:'eroglu'}, ... persons];
+        
+        console.log('persons-after-add', persons);
+
+        // diziye eleman push ile ekleme
+        // dizinin son elemanın ekler.
+        persons.push({name:'taner',surname:'sayın'});
+        // dizinin ilk elemanına eklemek için
+        persons.unshift({name:'ramazan',surname:'güneş'});
+
+        // obje dizisinden eleman çıkarma işlemi
+        persons = persons.filter(x=> x.name != 'ramazan');
+
+        console.log('filtered-persons', persons);
+
+        // 2.yöntem
+        persons.splice(2,1); // indeksine 2. indeksdeki arakadaşımızı sil demek. ikinci parametre 2.indekten sonra kaç adet kayıt silineceğini belirtmek için kullanırız.
+
+        console.log('filtered-persons-2', persons);
+
+
+        let personn = persons.find(x=> x.name == 'mert');
+
+        if(person != undefined){
+            personn.name = 'MERT';
+        };
+
+        // findIndex bize indeks değeri döndürür.
+        let personIndex = persons.findIndex(x=> x.name == 'taner');
+
+        persons[personIndex].name = 'TANER';
+
+
+        console.log('person-after-update', persons);
+
+        // map kullanımı
+
+       let personsSelectByName = persons.map(item => {
+            return {
+                name: item.name.toUpperCase()
+            }
+        });
+
+        console.log('personSelectByName', personsSelectByName);
+
+    </script>
+
+</body>
+</html>

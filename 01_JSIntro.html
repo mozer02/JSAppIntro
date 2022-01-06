@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+
+    <script>
+
+        // Variables
+        // number, string, boolean, object
+
+
+        // var, const, let
+        // global scope değüişkenler için var kullanırız.
+        // block scope değişkenler için ise const yada let kullanırız.
+        // değişken değeri alt kod satırlarında değişmiyecek ise const değişkenlik gösterecek ise let kullanılır.
+
+
+        var counter = 0; // global scope variable
+
+        function Deneme() {
+
+            const isExist = true; // function scope;
+            // default değeri true ve bu değer aşağıda değişmiyor.
+
+            if(isExist) {
+                // block scope
+                // değişebilir.
+                let number = counter +1;
+            }
+        }
+
+
+        const a = 10;
+        const b = 10.5;
+        const c = "deneme";
+        const d = true;
+        let e; // değişkene değer ataması yapılmadığında değişken undefined tipinde gelir
+        const f = null; // null olan değişkenler object tipinde tanımlanır.
+        const g = 10 / 0; // sonucu Infinity tanımsız döner.
+        const k = 'A'; // char tipi diye birşey yok string tipinde tutulur
+        const l = 10 / 'a';  //NaN => Not an Number
+        // JS de '' ile "" aynı şey string ifadeler JS Developerlar tarafında genelde '' ile işaretlenme eğilimidedir.
+        const names = ['Ali','Ahmet','Can'] // JS de dizi objedir.
+        const nameObj = {name:'ali',surname:'can', age:21} // literal object format object instance alma yöntemi
+        // C# tan farklı olarak ihtiyaç durumunda object açılabilir, class açmadan bu obj sayfada kullanılabilir.
+
+        // typeof değişkeni ile bir variable tipini öğreniriz.
+        console.log('a', typeof(a));
+        console.log('b', typeof(b));
+        console.log('c', typeof(c));
+        console.log('d', typeof(d));
+        console.log('e', typeof(e));
+        console.log('f', typeof(f));
+        console.log('g', typeof(g));
+        console.log('k', typeof(k));
+        console.log('g-result', g);
+        console.log('l-result', l);
+        console.log('namesArray', typeof(names));
+        console.log('nameObj', typeof(nameObj));
+
+        // bu kod ile çalışma zamanında bir objenin propertysini silebiliriz.
+        delete nameObj.age;
+        // bir objeye yeni bir property ekleyip değer ataması yaptık
+        nameObj['color'] = 'yellow';
+        nameObj.color = 1; // nesnesin propertysini string tipten number tipine çevirdik.
+
+        console.log('nameObj-result', nameObj);
+
+        // bir aksiyonu yerine getiren kod parçacıklarına fonkisyon diyoruz. C# daki karşılığı method.
+        const r = function() { // function tipinde result verir.
+
+        }; // literal function tanımlaması
+
+        console.log('r', typeof(r));
+        r(); // function çalıştırmak için  JS Call işlemi ();
+
+        // JS Functions davranış şekline göre değer döndüren ve değer döndürmeyen function olarak 2'ye ayrılır.
+
+        function sum(number1,number2){
+            return Number(number1) + Number(number2);
+        } // '1','2' result 12 => sayısal değer sonucu => 3
+
+        // number1,number2 function parameters fakat tipi yok.
+        // Not toplama işleminin sayısal bir anlam ifade etmesi için her iki parametre Number() function ile işaretlenip sayısal değere çevrildi.
+        // function dönüş tipi yok.
+        // değer döndüren bir function ise return ile işaretleniyor.
+
+        // tek satır arrow function
+        const sumArrow = (number1,number2) =>  
+        Number(number1) + Number(number2);
+        
+        // uzun format
+        const sumArrow2 = (number1,number2) => {
+            return Number(number1) + Number(number2);
+        }
+
+
+        // default format function tanımlaması
+        function showMessage(message){
+            alert(message);
+        }
+
+        // jS developerlar function isimlerini camelCase yazma eğilimindedir.
+        // yukarıdaki örnek de değer döndürmeyen bir function örneği.
+
+
+
+
+    </script>
+
+
+</body>
+</html>
